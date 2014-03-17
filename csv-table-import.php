@@ -121,7 +121,7 @@ class CSV_Table_Import {
 		add_filter( 'query_vars', array( &$this, 'add_query_vars' ), 10, 1 );
 		$this->maybe_flush_rules();
 
-		add_action( 'parse_request', array( &$this, 'handle_request' ), 10, 1 );
+		add_action( 'parse_request', array( &$this, 'handle_request' ), 1, 1 );
 		add_shortcode( 'csv_table', array( &$this, 'table_shortcode' ) );
 	}
 
@@ -432,7 +432,7 @@ class CSV_Table_Import {
 				</tr>
 				<?php do_action( $this->plugin_prefix . '_post_setting', $setting, $value ); ?>
 			<?php endforeach; ?>
-			<?php if ( 1 == $this->get_setting( 'enable' ) ): ?>
+			<?php if ( 1 == self::instance()->settings['enable'] ): ?>
 				<tr>
 					<td colspan="3">
 						<p>The script has been enabled</p>
